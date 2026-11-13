@@ -23,35 +23,33 @@ The workspace includes the supplied `build/` and `devel/` folders and the `GAMEP
 - Git LFS to retrieve the complete demo video.
 
 Install required packages if needed:
-
-```bash
+bash
 sudo apt update
 sudo apt install -y python3-pygame git-lfs
 git lfs install
-```
 
-The commands below assume ROS Noetic is installed at `/opt/ros/noetic` and that you have access to this GitHub repository.
+
+The commands below assume ROS Noetic is installed at `/opt/ros/noetic`.
 
 ## Open in WSL and VS Code
 
 Clone the `ROS` branch directly as a Catkin workspace in WSL's Linux filesystem:
 
-```bash
+bash
 git clone --branch ROS https://github.com/100523040/RP_AngelPelegry_ErikaSantano_JaimeSole_26.git ~/catkin_ws
 cd ~/catkin_ws
 code .
-```
 
-If `~/catkin_ws` already exists, choose another empty directory (for example, `~/catkin_ws_ros`) so you do not overwrite an existing workspace. If `code .` does not open a WSL window, install/enable the Microsoft WSL extension and reopen the folder in WSL.
+
 
 ## Build
 
-```bash
+bash
 source /opt/ros/noetic/setup.bash
 cd ~/catkin_ws
 catkin_make
 source devel/setup.bash
-```
+
 
 For each new terminal, run the two `source` commands before starting a node. If Python cannot import Pygame, install it with `python3 -m pip install --user pygame==2.6.1` and rebuild.
 
@@ -59,10 +57,10 @@ For each new terminal, run the two `source` commands before starting a node. If 
 
 Open five WSL terminals. In each one, run:
 
-```bash
+bash
 source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
-```
+
 
 Then start one process per terminal in this order:
 
@@ -73,10 +71,3 @@ Then start one process per terminal in this order:
 5. Player information prompt: `rosrun game_pr info_user_node.py`
 
 Enter a full name, username, and positive age in Terminal 5. After the welcome screen, move with the arrow keys or W/A/S/D while Terminal 4 has focus. Keep the Pygame window visible to watch the game. At the end, `result_node` prints the username and score. Press Esc in the game window or Ctrl+C in each node terminal to stop; stop `roscore` last.
-
-
-git commit -m "Update ROS game workspace and demonstration"
-git push origin ROS
-```
-
-A push updates the `ROS` branch only; it does not merge it into `main`. The `build/` and `devel/` folders included here are generated workspace snapshots; rerun `catkin_make` before using them in a different environment.
