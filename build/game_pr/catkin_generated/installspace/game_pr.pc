@@ -1,0 +1,8 @@
+prefix=/home/esm/game_ws/install
+
+Name: game_pr
+Description: Description of game_pr
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

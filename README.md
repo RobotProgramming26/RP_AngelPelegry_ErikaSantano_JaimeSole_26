@@ -13,20 +13,24 @@ This repository contains the ROS1 Catkin workspace for Part I of the Robot Progr
 
 The `game_msgs` package defines `GameUserMsg` with `name`, `username`, and `age` fields. The game moves through Welcome, Game, and Final phases.
 
+The workspace includes the supplied `build/` and `devel/` folders and the `GAMEPLAY_ROS.mp4` demonstration. The Catkin folders are generated snapshots and should be rebuilt with `catkin_make` in a local WSL environment. The video is stored with Git LFS; install Git LFS and run `git lfs pull` to retrieve the full recording.
+
 ## Requirements
 
 - ROS Noetic on Ubuntu 20.04.
 - WSL 2 with WSLg (or another Linux display server) to show the Pygame window from WSL.
 - Python 3 and Pygame.
+- Git LFS to retrieve the complete demo video.
 
-Install Pygame if needed:
+Install required packages if needed:
 
 ```bash
 sudo apt update
-sudo apt install -y python3-pygame
+sudo apt install -y python3-pygame git-lfs
+git lfs install
 ```
 
-The commands below assume ROS Noetic is installed at `/opt/ros/noetic`.
+The commands below assume ROS Noetic is installed at `/opt/ros/noetic` and that you have access to this GitHub repository.
 
 ## Open in WSL and VS Code
 
@@ -38,7 +42,7 @@ cd ~/catkin_ws
 code .
 ```
 
-If `code .` does not open a WSL window, install/enable the Microsoft WSL extension in VS Code and reopen the folder in WSL.
+If `~/catkin_ws` already exists, choose another empty directory (for example, `~/catkin_ws_ros`) so you do not overwrite an existing workspace. If `code .` does not open a WSL window, install/enable the Microsoft WSL extension and reopen the folder in WSL.
 
 ## Build
 
@@ -49,7 +53,7 @@ catkin_make
 source devel/setup.bash
 ```
 
-For each new terminal, run the two `source` commands before starting a node. If Python cannot import Pygame, install it with `sudo apt install -y python3-pygame` and rebuild.
+For each new terminal, run the two `source` commands before starting a node. If Python cannot import Pygame, install it with `python3 -m pip install --user pygame==2.6.1` and rebuild.
 
 ## Run the game
 
@@ -72,7 +76,7 @@ Enter a full name, username, and positive age in Terminal 5. After the welcome s
 
 ## Record a demonstration
 
-For a short recording of one app, open Xbox Game Bar with **Win+G** and start/stop with **Win+Alt+R** (saved in **Videos/Captures** by default). For the assignment proof, capture both the Pygame window and a ROS terminal: in OBS Studio on Windows, add a **Display Capture** source, arrange the game and terminal on the captured monitor, then click **Start Recording**. Display Capture records the whole monitor. See the [OBS quick start guide](https://obsproject.com/kb/quick-start-guide).
+For a short recording of one app, open Xbox Game Bar with **Win+G** and start/stop with **Win+Alt+R** (saved in **Videos/Captures** by default). For a recording that shows both the Pygame window and a ROS terminal, use OBS Studio on Windows, add a **Display Capture** source, arrange the game and terminal on the captured monitor, then click **Start Recording**. Display Capture records the whole monitor. See the [OBS quick start guide](https://obsproject.com/kb/quick-start-guide).
 
 ## Publish changes to ROS
 
@@ -80,11 +84,11 @@ To publish commits to the `ROS` branch without merging them into `main`:
 
 ```bash
 git switch ROS
+git lfs install
 git status --short
-git add README.md .gitignore src
-git commit -m "Add ROS1 game workspace and run instructions"
+git add -A
+git commit -m "Update ROS game workspace and demonstration"
 git push origin ROS
 ```
 
-A push updates the `ROS` branch only; it does not merge it into `main`. Do not open or merge a pull request unless the team asks for one. Generated Catkin folders (`build`, `devel`, `install`, and `logs`) are ignored and should not be committed.
-
+A push updates the `ROS` branch only; it does not merge it into `main`. The `build/` and `devel/` folders included here are generated workspace snapshots; rerun `catkin_make` before using them in a different environment.
