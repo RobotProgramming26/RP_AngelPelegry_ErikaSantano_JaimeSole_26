@@ -25,8 +25,6 @@ from game_msgs.msg import GameUserMsg
 WIDTH, HEIGHT = 800, 600
 FPS = 60
 FLOOR_Y = HEIGHT - 44
-ROS_CONTROL_COMMAND_HOLD = 0.55
-ROS_CONTROL_STRENGTH = 1.0
 
 # --- Colors ---
 WHITE = (255, 255, 255)
@@ -625,7 +623,6 @@ class GameNode(object):
         self.__user_age = 0
         self.__current_phase = "WELCOME" # WELCOME -> GAME -> FINAL
         self.__control_command = ""
-        self.__control_command_timer = 0.0
         self.welcome_timer = 0.0 # Countdown timer for Welcome screen display
 
         # Pygame setup
@@ -672,12 +669,7 @@ class GameNode(object):
             self.welcome_timer = 4.0
 
     def __keyboard_control_callback(self, msg):
-        if msg.data in ("LEFT", "RIGHT", "UP", "DOWN"):
-            self.__control_command = msg.data
-            self.__control_command_timer = ROS_CONTROL_COMMAND_HOLD
-        elif msg.data == "STOP":
-            self.__control_command = ""
-            self.__control_command_timer = 0.0
+        self.__control_command = msg.data
 
     # --- GAME LOGIC ---
     def reset_game(self):
@@ -761,20 +753,17 @@ class GameNode(object):
 
         # Direction from /keyboard_control topic or local keyboard fallback
         dir_x, dir_y = 0, 0
-        # Keep each ROS direction active long enough to bridge the terminal's
-        # initial key-repeat delay. Repeated key events refresh this timer.
-        if self.__control_command_timer > 0.0:
-            if self.__control_command == "LEFT":
-                dir_x = -ROS_CONTROL_STRENGTH
-            elif self.__control_command == "RIGHT":
-                dir_x = ROS_CONTROL_STRENGTH
-            elif self.__control_command == "UP":
-                dir_y = -ROS_CONTROL_STRENGTH
-            elif self.__control_command == "DOWN":
-                dir_y = ROS_CONTROL_STRENGTH
-            self.__control_command_timer = max(0.0, self.__control_command_timer - dt)
-        else:
-            self.__control_command = ""
+        if self.__control_command == "LEFT":
+            dir_x = -2.5
+        elif self.__control_command == "RIGHT":
+            dir_x = 2.5
+        elif self.__control_command == "UP":
+            dir_y = -2.5
+        elif self.__control_command == "DOWN":
+            dir_y = 2.5
+
+        # Clear the control command after processing to avoid continuous sliding
+        self.__control_command = ""
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]: dir_x = -1
