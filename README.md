@@ -74,19 +74,7 @@ Then start one process per terminal in this order:
 
 Enter a full name, username, and positive age in Terminal 5. After the welcome screen, move with the arrow keys or W/A/S/D while Terminal 4 has focus. Keep the Pygame window visible to watch the game. At the end, `result_node` prints the username and score. Press Esc in the game window or Ctrl+C in each node terminal to stop; stop `roscore` last.
 
-## Record a demonstration
 
-For a short recording of one app, open Xbox Game Bar with **Win+G** and start/stop with **Win+Alt+R** (saved in **Videos/Captures** by default). For a recording that shows both the Pygame window and a ROS terminal, use OBS Studio on Windows, add a **Display Capture** source, arrange the game and terminal on the captured monitor, then click **Start Recording**. Display Capture records the whole monitor. See the [OBS quick start guide](https://obsproject.com/kb/quick-start-guide).
-
-## Publish changes to ROS
-
-To publish commits to the `ROS` branch without merging them into `main`:
-
-```bash
-git switch ROS
-git lfs install
-git status --short
-git add -A
 git commit -m "Update ROS game workspace and demonstration"
 git push origin ROS
 ```
