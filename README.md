@@ -4,29 +4,29 @@ This repository contains a small Pygame game connected to ROS1. The player provi
 
 ## Packages
 
-- `game_msgs` defines the custom `GameUserMsg` message.
-- `game_pr` contains the four ROS nodes.
+- game_msgs defines the custom GameUserMsg message.
+- game_pr contains the four ROS nodes.
 
-The workspace also includes the recorded demonstration, `GAMEPLAY_ROS.mp4`. It is stored using Git LFS, so install Git LFS and run `git lfs pull` if the video does not download with the repository.
+The workspace also includes the recorded demonstration, GAMEPLAY_ROS.mp4. It is stored using Git LFS, so install Git LFS and run git lfs pull if the video does not download with the repository.
 
 ## ROS nodes and communication
 
 | Node | Purpose |
 |---|---|
-| `info_user_node` | Requests the player's full name, username, and age, then publishes them. |
-| `game_node` | Runs the game, receives player details and movement commands, and publishes the final score. |
-| `control_node` | Reads arrow-key or WASD input and publishes movement commands. |
-| `result_node` | Receives the player's username and final score, then prints the result. |
+| info_user_node | Requests the player's full name, username, and age, then publishes them. |
+| game_node | Runs the game, receives player details and movement commands, and publishes the final score. |
+| control_node | Reads arrow-key or WASD input and publishes movement commands. |
+| result_node | Receives the player's username and final score, then prints the result. |
 
 The nodes communicate through these topics:
 
 | Topic | Message type | Direction |
 |---|---|---|
-| `/user_information` | `game_msgs/GameUserMsg` | `info_user_node` publishes player details; `game_node` and `result_node` subscribe. |
-| `/keyboard_control` | `std_msgs/String` | `control_node` publishes `UP`, `DOWN`, `LEFT`, or `RIGHT`; `game_node` subscribes. |
-| `/result_information` | `std_msgs/Int64` | `game_node` publishes the final score; `result_node` subscribes. |
+| /user_information | game_msgs/GameUserMsg | info_user_node publishes player details; game_node and result_node subscribe. |
+| /keyboard_control | std_msgs/String | control_node publishes UP, DOWN, LEFT, or RIGHT; game_node subscribes. |
+| /result_information | std_msgs/Int64 | game_node publishes the final score; result_node subscribes. |
 
-`GameUserMsg` contains `name` (`string`), `username` (`string`), and `age` (`int64`). The game runs through Welcome, Game, and Final phases.
+GameUserMsg contains name (string), username (string), and age (int64). The game runs through Welcome, Game, and Final phases.
 
 ## Requirements
 
