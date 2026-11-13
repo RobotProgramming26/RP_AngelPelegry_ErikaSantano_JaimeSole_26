@@ -72,7 +72,7 @@ Enter a full name, username, and positive age in Terminal 5. After the welcome s
 
 ## Record a demonstration
 
-On Windows, open Xbox Game Bar with **Win+G** and start/stop recording with **Win+Alt+R**. Show the game window and the result terminal, including player details, gameplay, and final score. Recordings are saved in **Videos/Captures** by default.
+For a short recording of one app, open Xbox Game Bar with **Win+G** and start/stop with **Win+Alt+R** (saved in **Videos/Captures** by default). For the assignment proof, capture both the Pygame window and a ROS terminal: in OBS Studio on Windows, add a **Display Capture** source, arrange the game and terminal on the captured monitor, then click **Start Recording**. Display Capture records the whole monitor. See the [OBS quick start guide](https://obsproject.com/kb/quick-start-guide).
 
 ## Publish changes to ROS
 
@@ -87,3 +87,4 @@ git push origin ROS
 ```
 
 A push updates the `ROS` branch only; it does not merge it into `main`. Do not open or merge a pull request unless the team asks for one. Generated Catkin folders (`build`, `devel`, `install`, and `logs`) are ignored and should not be committed.
+
