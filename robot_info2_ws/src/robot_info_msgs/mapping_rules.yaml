@@ -1,0 +1,15 @@
+# ROS1 package "robotinfo_msgs"  <->  ROS2 package "robot_info_msgs"
+# Package names differ, so ros1_bridge needs these rules to pair the types.
+-
+  ros1_package_name: 'robotinfo_msgs'
+  ros2_package_name: 'robot_info_msgs'
+-
+  ros1_package_name: 'robotinfo_msgs'
+  ros1_service_name: 'GetUserScore'
+  ros2_package_name: 'robot_info_msgs'
+  ros2_service_name: 'GetUserScore'
+-
+  ros1_package_name: 'robotinfo_msgs'
+  ros1_service_name: 'SetGameDifficulty'
+  ros2_package_name: 'robot_info_msgs'
+  ros2_service_name: 'SetGameDifficulty'

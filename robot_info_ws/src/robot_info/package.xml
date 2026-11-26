@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robot_info</name>
+  <version>0.2.0</version>
+  <description>Robot Factory game: ROS1 nodes, services, parameters and launcher (Part II).</description>
+
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>robotinfo_msgs</build_depend>
+
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>robotinfo_msgs</exec_depend>
+  <exec_depend>python3-pygame</exec_depend>
+</package>

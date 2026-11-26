@@ -1,0 +1,19 @@
+rosbag2_bagfile_information:
+  version: 4
+  storage_identifier: sqlite3
+  relative_file_paths:
+    - robot_info2.bag_0.db3
+  duration:
+    nanoseconds: 90946985206
+  starting_time:
+    nanoseconds_since_epoch: 1795603624593803179
+  message_count: 621
+  topics_with_message_count:
+    - topic_metadata:
+        name: /keyboard_control
+        type: std_msgs/msg/String
+        serialization_format: cdr
+        offered_qos_profiles: ""
+      message_count: 621
+  compression_format: ""
+  compression_mode: ""

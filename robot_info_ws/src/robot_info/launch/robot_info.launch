@@ -1,0 +1,31 @@
+<launch>
+  <!--
+    robot_info.launch  -  starts the complete Robot Factory game (ROS1).
+    roslaunch starts roscore automatically if it is not running.
+
+    info_user_node and control_node read from the keyboard (input() / raw tty),
+    and roslaunch does not give nodes a terminal, so they open in their own
+    window through launch-prefix. Default: xterm (sudo apt install xterm).
+    Alternative terminal: pass term:="gnome-terminal (double-dash)wait (double-dash)" (see README)
+  -->
+  <arg name="term"         default="xterm -e" />
+  <arg name="player_color" default="2" />   <!-- 1 = Red, 2 = Purple, 3 = Blue -->
+
+  <!-- Main game: Pygame window, services /user_score and /difficulty, parameters -->
+  <node pkg="robot_info" type="game_node.py" name="game_node" output="screen" required="true">
+    <param name="user_name"           type="str" value="unknown" />
+    <param name="change_player_color" type="int" value="$(arg player_color)" />
+    <param name="screen_param"        type="str" value="phase1" />
+  </node>
+
+  <!-- Player data + difficulty (needs a terminal to type into) -->
+  <node pkg="robot_info" type="info_user_node.py" name="info_user_node"
+        output="screen" launch-prefix="$(arg term)" />
+
+  <!-- Keyboard teleoperation (needs a terminal in raw mode) -->
+  <node pkg="robot_info" type="control_node.py" name="control_node"
+        output="screen" launch-prefix="$(arg term)" />
+
+  <!-- Final result + /user_score service client -->
+  <node pkg="robot_info" type="result_node.py" name="result_game_node" output="screen" />
+</launch>
