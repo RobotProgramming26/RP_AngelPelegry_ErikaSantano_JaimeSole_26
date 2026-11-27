@@ -252,10 +252,3 @@ ros2 bag info robot_info2.bag
 ros2 service list
 ```
 
-For the EXTRA functionality, the custom services can also be tested from ROS2.
-
-## 10. Authors
-
-Robot Factory – Final Assignment, Part II.
-
-Universidad Carlos III de Madrid.
